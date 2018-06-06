@@ -15,8 +15,8 @@ jobs:
       AWS_S3_UPLOAD_BUCKET_NAME: outline-circle
     steps:
       - checkout
-      - run:
-          command: 'sudo redis-cli ping >/dev/null 2>&1 || sudo service redis-server
+      - run: 'apt-get update && apt-get install -y redis-tools'
+      - run: 'sudo redis-cli ping >/dev/null 2>&1 || sudo service redis-server
             start; '
       # Dependencies
       #   This would typically go in either a build or a build-and-test job when using workflows
