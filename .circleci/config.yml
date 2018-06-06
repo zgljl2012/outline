@@ -15,7 +15,7 @@ jobs:
       AWS_S3_UPLOAD_BUCKET_NAME: outline-circle
     steps:
       - checkout
-      - run: 'apt-get update && apt-get install -y redis-tools'
+      - run: 'sudo apt-get update && sudo apt-get install -y redis-tools'
       - run: 'sudo redis-cli ping >/dev/null 2>&1 || sudo service redis-server
             start; '
       # Dependencies
