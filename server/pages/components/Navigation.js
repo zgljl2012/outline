@@ -2,8 +2,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
+import Centered from './Centered';
 import {
-  signin,
   developers,
   changelog,
   about,
@@ -103,9 +103,9 @@ const MenuItemDesktop = styled(MenuItem)`
   `};
 `;
 
-const Nav = styled.nav`
+const Nav = styled(Centered)`
   display: flex;
-  padding: 20px 30px;
+  padding: 20px 0;
   align-items: center;
   justify-content: space-between;
 `;
@@ -115,7 +115,7 @@ const BottomNav = styled.nav`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin: 4em 0;
 
   > div {
     display: flex;
@@ -125,6 +125,7 @@ const BottomNav = styled.nav`
 
   ${breakpoint('tablet')`
     flex-direction: row;
+    margin: 0 0 4em;
 
     > div {
       margin: 0 0 0 40px;
