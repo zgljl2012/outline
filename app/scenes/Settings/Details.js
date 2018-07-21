@@ -11,7 +11,6 @@ import Input, { LabelText } from 'components/Input';
 import Button from 'components/Button';
 import CenteredContent from 'components/CenteredContent';
 import PageTitle from 'components/PageTitle';
-import HelpText from 'components/HelpText';
 import Flex from 'shared/components/Flex';
 
 type Props = {
@@ -44,7 +43,7 @@ class Details extends React.Component<Props> {
       name: this.name,
       avatarUrl: this.avatarUrl,
     });
-    this.props.ui.showToast('Details saved', 'success');
+    this.props.ui.showToast('Settings saved', 'success');
   };
 
   handleNameChange = (ev: SyntheticInputEvent<*>) => {
@@ -72,19 +71,6 @@ class Details extends React.Component<Props> {
       <CenteredContent>
         <PageTitle title="Details" />
         <h1>Details</h1>
-        {team.slackConnected && (
-          <HelpText>
-            This team is connected to a <strong>Slack</strong> team. Your
-            colleagues can join by signing in with their Slack account details.
-          </HelpText>
-        )}
-        {team.googleConnected && (
-          <HelpText>
-            This team is connected to a <strong>Google</strong> domain. Your
-            colleagues can join by signing in with their Google account.
-          </HelpText>
-        )}
-
         <ProfilePicture column>
           <LabelText>Logo</LabelText>
           <AvatarContainer>

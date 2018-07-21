@@ -39,11 +39,15 @@ const uploadAvatar = async model => {
   const endpoint = publicS3Endpoint();
 
   if (model.avatarUrl && !model.avatarUrl.startsWith(endpoint)) {
-    const newUrl = await uploadToS3FromUrl(
-      model.avatarUrl,
-      `avatars/${model.id}/${uuid.v4()}`
-    );
-    if (newUrl) model.avatarUrl = newUrl;
+    try {
+      const newUrl = await uploadToS3FromUrl(
+        model.avatarUrl,
+        `avatars/${model.id}/${uuid.v4()}`
+      );
+      if (newUrl) model.avatarUrl = newUrl;
+    } catch (err) {
+      // we can try again next time
+    }
   }
 };
 

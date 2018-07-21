@@ -12,7 +12,7 @@ const { authorize } = policy;
 const router = new Router();
 
 router.post('team.update', auth(), async ctx => {
-  const { name, avatarUrl } = ctx.body;
+  const { name, avatarUrl, require2FA, requireNotGuest } = ctx.body;
   const endpoint = publicS3Endpoint();
 
   const user = ctx.state.user;
@@ -20,6 +20,8 @@ router.post('team.update', auth(), async ctx => {
   authorize(user, 'update', team);
 
   if (name) team.name = name;
+  if (require2FA) team.require2FA = require2FA;
+  if (requireNotGuest) team.requireNotGuest = requireNotGuest;
   if (avatarUrl && avatarUrl.startsWith(`${endpoint}/uploads/${user.id}`)) {
     team.avatarUrl = avatarUrl;
   }

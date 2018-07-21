@@ -24,6 +24,7 @@ import Document from 'scenes/Document';
 import Search from 'scenes/Search';
 import Settings from 'scenes/Settings';
 import Details from 'scenes/Settings/Details';
+import Security from 'scenes/Settings/Security';
 import People from 'scenes/Settings/People';
 import Slack from 'scenes/Settings/Slack';
 import Shares from 'scenes/Settings/Shares';
@@ -76,6 +77,11 @@ if (element) {
                           exact
                           path="/settings/details"
                           component={Details}
+                        />
+                        <Route
+                          exact
+                          path="/settings/security"
+                          component={Security}
                         />
                         <Route
                           exact

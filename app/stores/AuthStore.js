@@ -78,7 +78,12 @@ class AuthStore {
   };
 
   @action
-  updateTeam = async (params: { name: string, avatarUrl: ?string }) => {
+  updateTeam = async (params: {
+    name?: string,
+    avatarUrl?: ?string,
+    require2FA?: boolean,
+    requireNotGuest?: boolean,
+  }) => {
     this.isSaving = true;
 
     try {

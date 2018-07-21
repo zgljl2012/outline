@@ -29,6 +29,8 @@ export type Team = {
   id: string,
   name: string,
   avatarUrl: string,
+  requireNotGuest: boolean,
+  require2FA: boolean,
   slackConnected: boolean,
   googleConnected: boolean,
 };
