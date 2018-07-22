@@ -20,8 +20,8 @@ router.post('team.update', auth(), async ctx => {
   authorize(user, 'update', team);
 
   if (name) team.name = name;
-  if (require2FA) team.require2FA = require2FA;
-  if (requireNotGuest) team.requireNotGuest = requireNotGuest;
+  if (require2FA !== undefined) team.require2FA = require2FA;
+  if (requireNotGuest !== undefined) team.requireNotGuest = requireNotGuest;
   if (avatarUrl && avatarUrl.startsWith(`${endpoint}/uploads/${user.id}`)) {
     team.avatarUrl = avatarUrl;
   }

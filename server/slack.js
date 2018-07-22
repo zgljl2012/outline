@@ -53,3 +53,10 @@ export async function oauthAccess(
     code,
   });
 }
+
+export async function userInfo(userId: string, token: string) {
+  return request('users.info', {
+    user: userId,
+    token,
+  });
+}

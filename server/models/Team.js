@@ -17,6 +17,8 @@ const Team = sequelize.define(
     slackId: { type: DataTypes.STRING, allowNull: true },
     googleId: { type: DataTypes.STRING, allowNull: true },
     avatarUrl: { type: DataTypes.STRING, allowNull: true },
+    require2FA: { type: DataTypes.BOOLEAN, allowNull: false },
+    requireNotGuest: { type: DataTypes.BOOLEAN, allowNull: false },
     slackData: DataTypes.JSONB,
   },
   {

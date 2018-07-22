@@ -44,6 +44,18 @@ router.get('slack.callback', async ctx => {
     },
   });
 
+  if (team.require2FA && !data.user.has_2fa) {
+    ctx.redirect('/?notice=2fa-required-error');
+    return;
+  }
+  if (
+    team.requireNotGuest &&
+    (data.user.is_restricted || data.user.is_ultra_restricted)
+  ) {
+    ctx.redirect('/?notice=guest-restricted-error');
+    return;
+  }
+
   const [user] = await User.findOrCreate({
     where: {
       service: 'slack',

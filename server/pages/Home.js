@@ -13,11 +13,31 @@ import GithubLogo from '../../shared/components/GithubLogo';
 import Flex from '../../shared/components/Flex';
 import { githubUrl, slackAppStoreUrl } from '../../shared/utils/routeHelpers';
 
+type AuthErrorCodes =
+  | 'google-hd'
+  | 'auth-error'
+  | 'hd-not-allowed'
+  | '2fa-required-error'
+  | 'guest-restricted-error';
+
 type Props = {
-  notice?: 'google-hd' | 'auth-error' | 'hd-not-allowed',
+  notice?: AuthErrorCodes,
   lastSignedIn: string,
   googleSigninEnabled: boolean,
   slackSigninEnabled: boolean,
+};
+
+const NOTICES = {
+  'google-hd':
+    'Sorry, Google sign in cannot be used with a personal email. Please try signing in with your company Google account.',
+  'hd-not-allowed':
+    'Sorry, Google sign in cannot be used with a personal email. Please try signing in with your company Google account.',
+  '2fa-required-error':
+    'Sorry, your Slack account must have 2FA enabled to sign in to Outline. Please enable 2FA in Slack and try again.',
+  'guest-restricted-error':
+    'Sorry, your team administrator has restricted sign in for guest accounts.',
+  'auth-error':
+    'Authentication failed - we were unable to sign you in at this time. Please try again.',
 };
 
 function Home(props: Props) {
@@ -28,6 +48,7 @@ function Home(props: Props) {
       </Helmet>
       <Grid>
         <Hero id="signin">
+          {props.notice && <Notice>{NOTICES[props.notice]}</Notice>}
           <h1>Your team’s knowledge base</h1>
           <HeroText>
             Team wiki, documentation, meeting notes, playbooks, onboarding, work
@@ -36,24 +57,6 @@ function Home(props: Props) {
           <p>
             <SigninButtons {...props} />
           </p>
-          {props.notice === 'google-hd' && (
-            <Notice>
-              Sorry, Google sign in cannot be used with a personal email. Please
-              try signing in with your company Google account.
-            </Notice>
-          )}
-          {props.notice === 'hd-not-allowed' && (
-            <Notice>
-              Sorry, your Google apps domain is not allowed. Please try again
-              with an allowed company domain.
-            </Notice>
-          )}
-          {props.notice === 'auth-error' && (
-            <Notice>
-              Authentication failed - we were unable to sign you in at this
-              time. Please try again.
-            </Notice>
-          )}
         </Hero>
         <Mask>
           <Features>
